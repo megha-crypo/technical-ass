@@ -1,0 +1,277 @@
+{
+  "intents": [
+    {
+      "intent": "carp",
+      "examples": [
+        {
+          "text": "Carpenter"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Sec-5",
+      "examples": [
+        {
+          "text": "5"
+        },
+        {
+          "text": "Sector-5"
+        },
+        {
+          "text": "Sector 5"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Gard1",
+      "examples": [
+        {
+          "text": "Gardner"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Sec3",
+      "examples": [
+        {
+          "text": "3"
+        },
+        {
+          "text": "Sector-3"
+        },
+        {
+          "text": "sector 3"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Plum1",
+      "examples": [
+        {
+          "text": "Plumber"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Sec6",
+      "examples": [
+        {
+          "text": "6"
+        },
+        {
+          "text": "Sector-6"
+        },
+        {
+          "text": "Sector 6"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Electric",
+      "examples": [
+        {
+          "text": "Contact number of Electrician"
+        },
+        {
+          "text": "Electrician"
+        },
+        {
+          "text": "Want Electrician"
+        },
+        {
+          "text": "Contact No. of Electrician"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Catsec",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Sector6",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sector2",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sector3",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sector4",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sector5",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Sector1",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Cattech",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Electrician",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Plumber",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Gardner",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Carpenter",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "sec3",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Mr. Rakesh Chatrapati\nContact No- 234567890\nMr. Shyam Sunder\nContact No-234452389"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1590306214288",
+      "conditions": "@Catsec:Sector3",
+      "dialog_node": "node_4_1590306401702"
+    },
+    {
+      "type": "standard",
+      "title": "El1",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "In which sector u are staying (Sector-1 to Secto-10 Assistance Available)In which sector u are staying (Sector-1 to Sector-10 Assistance Avvailable)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "#Electric",
+      "dialog_node": "node_8_1590306214288"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "Welcome",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello I am Technical Assistance Chatbot, will provide u the assistance (in ur near by location ) for\n•\tCarpenter\n•\tElectrician\n•\tPlumber\n•\tGardner\nEnter Your Choice as per Ur Requirement"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "technical",
+  "language": "en",
+  "description": ""
+}
